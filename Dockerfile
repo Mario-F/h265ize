@@ -1,9 +1,7 @@
 FROM jrottenberg/ffmpeg:4.2-alpine
 
-RUN apk add nodejs nodejs-npm
-
 COPY . /code/
-RUN apk add --no-cache --update-cache git ffmpeg && \
+RUN apk add --no-cache --update-cache git nodejs nodejs-npm && \
     cd /code && npm install --global --no-optional && \
     apk del git && \
     mkdir /input && mkdir /output
@@ -11,4 +9,4 @@ RUN apk add --no-cache --update-cache git ffmpeg && \
 VOLUME ["/input", "/output"]
 WORKDIR /h265ize
 
-ENTRYPOINT ["/usr/local/bin/h265ize", "/input", "-d", "/output"]
+ENTRYPOINT ["/usr/bin/h265ize", "/input", "-d", "/output"]
