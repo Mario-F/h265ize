@@ -1,4 +1,6 @@
-FROM node:12-alpine
+FROM jrottenberg/ffmpeg:4.2-alpine
+
+RUN apk add nodejs nodejs-npm
 
 COPY . /code/
 RUN apk add --no-cache --update-cache git ffmpeg && \
